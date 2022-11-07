@@ -1,7 +1,7 @@
 import { Advancement, Criteria } from '../interface/advancement'
 import { Sprite } from '../interface/icon'
 
-const criteria: Record<string, Criteria> = {
+const criteriaList: Record<string, Criteria> = {
   'adventure/kill_all_mobs': {
     iconCollection: Sprite.Entity,
     items: {
@@ -726,4 +726,4 @@ const advancements: Record<string, Advancement> = {
   },
 }
 
-export { advancements, criteria }
+export { advancements, criteriaList }

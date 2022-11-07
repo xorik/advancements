@@ -1,7 +1,7 @@
 import { Sprite } from './icon'
 
 interface AdvancementFileItem {
-  criteria: Record<string, string>
+  criteria: Record<string, string | undefined>
   done: boolean
 }
 
@@ -19,4 +19,4 @@ interface Criteria {
   items: Record<string, string>
 }
 
-export type { Advancement, AdvancementFile, Criteria }
+export type { Advancement, AdvancementFile, AdvancementFileItem, Criteria }

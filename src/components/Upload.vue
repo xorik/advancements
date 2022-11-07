@@ -2,14 +2,20 @@
 import { useDropZone } from '@vueuse/core'
 import { ref } from 'vue'
 
+import { AdvancementFile } from '../interface/advancement'
+
+const emit = defineEmits<{
+  (e: 'update', value: AdvancementFile): void
+}>()
+
 const dropZoneRef = ref<HTMLDivElement>()
-const data = ref<object | null>({ hello: 'world' })
 
 async function onDrop(files: File[] | null) {
   if (files === null || files.length === 0) {
     return
   }
-  data.value = JSON.parse(await files[0].text())
+
+  emit('update', JSON.parse(await files[0].text()))
 }
 
 const { isOverDropZone } = useDropZone(dropZoneRef, onDrop)

@@ -1,18 +1,39 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import { criteria } from '../data/advancements'
-import { Advancement, Criteria } from '../interface/advancement'
+import { criteriaList } from '../data/advancements'
+import { Advancement, AdvancementFileItem } from '../interface/advancement'
 
 const props = defineProps<{
   index: string
   advancement: Advancement
+  data?: AdvancementFileItem
 }>()
 
-const currentCriteria = ref<Criteria | null>(null)
+interface CriteriaItem {
+  key: string
+  icon: string
+  done: boolean
+}
 
-if (criteria[props.index] !== undefined) {
-  currentCriteria.value = criteria[props.index]
+const criteria = ref<CriteriaItem[] | null>(null)
+
+// Check if current advancement has connected criteria list
+const currentCriteria = criteriaList[props.index]
+if (currentCriteria !== undefined) {
+  const list: CriteriaItem[] = []
+
+  // First set finished criteria
+  for (const key in currentCriteria.items) {
+    const unfinished = props.data?.criteria[key] !== undefined || props.data?.criteria['minecraft:' + key] !== undefined
+
+    list.push({
+      key: key,
+      icon: currentCriteria.items[key],
+      done: !unfinished,
+    })
+  }
+  criteria.value = list.sort((a, b) => +b.done - +a.done)
 }
 </script>
 
@@ -22,9 +43,13 @@ if (criteria[props.index] !== undefined) {
       <AdvancementIcon :data="advancement" class="flex-shrink-0" />
       <div>
         <p class="mb-2 font-bold">{{ advancement.title }}</p>
-        <div v-if="currentCriteria !== null" class="flex flex-wrap gap-1">
-          <div v-for="(icon, key) in currentCriteria.items" :key="key" :title="key">
-            <Icon :item="icon" :collection="currentCriteria.iconCollection" />
+        <div v-if="criteria !== null" class="flex flex-wrap gap-1">
+          <div v-for="item in criteria" :key="item.key" :title="item.key">
+            <Icon
+              :item="item.icon"
+              :collection="currentCriteria.iconCollection"
+              :class="{ 'opacity-30 grayscale': !item.done }"
+            />
           </div>
         </div>
       </div>
