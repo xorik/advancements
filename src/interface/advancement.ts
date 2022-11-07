@@ -11,6 +11,7 @@ interface Advancement {
   title: string
   icon: string
   type: 'plain' | 'oval' | 'fancy'
+  rowspan?: number
 }
 
 interface Criteria {

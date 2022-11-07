@@ -14,4 +14,5 @@ module.exports = {
   daisyui: {
     themes: ["light", "dark"],
   },
+  safelist: [{pattern: /row-span-[2-8]/}]
 }

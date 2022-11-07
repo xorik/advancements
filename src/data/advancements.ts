@@ -538,6 +538,7 @@ const advancements: Record<string, Advancement> = {
     title: 'Monsters Hunted',
     type: 'fancy',
     icon: 'Diamond Sword',
+    rowspan: 3,
   },
   'adventure/totem_of_undying': {
     title: 'Postmortal',
@@ -573,6 +574,7 @@ const advancements: Record<string, Advancement> = {
     title: 'Adventuring Time',
     type: 'fancy',
     icon: 'Diamond Boots',
+    rowspan: 4,
   },
   'adventure/play_jukebox_in_meadows': {
     title: 'Sound of Music',
@@ -668,6 +670,7 @@ const advancements: Record<string, Advancement> = {
     title: 'Two by Two',
     type: 'fancy',
     icon: 'Golden Carrot',
+    rowspan: 3,
   },
   'husbandry/allay_deliver_cake_to_note_block': {
     title: 'Birthday Song',
@@ -678,6 +681,7 @@ const advancements: Record<string, Advancement> = {
     title: 'A Complete Catalogue',
     type: 'fancy',
     icon: 'Raw Cod',
+    rowspan: 2,
   },
   'husbandry/tactical_fishing': {
     title: 'Tactical Fishing',
@@ -693,6 +697,7 @@ const advancements: Record<string, Advancement> = {
     title: 'A Balanced Diet',
     type: 'fancy',
     icon: 'Apple',
+    rowspan: 3,
   },
   'husbandry/obtain_netherite_hoe': {
     title: 'Serious Dedication',
