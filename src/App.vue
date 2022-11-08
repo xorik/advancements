@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 
 import AdvancementCard from './components/AdvancementCard.vue'
+import Progress from './components/Progress.vue'
 import { advancements } from './data/advancements'
 import { Advancement, AdvancementFile, AdvancementFileItem } from './interface/advancement'
 
@@ -39,6 +40,13 @@ function test(file: AdvancementFile) {
     </h3>
     <div v-else-if="unfinishedAdvancements !== null">
       <h3 class="m-3 text-center text-2xl text-accent">Advancements</h3>
+
+      <Progress
+        :done="Object.keys(advancements).length - unfinishedAdvancements.length"
+        :total="Object.keys(advancements).length"
+        class="my-5"
+      />
+
       <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <AdvancementCard
           v-for="adv in unfinishedAdvancements"

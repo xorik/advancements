@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
     AdvancementIcon: typeof import('./src/components/AdvancementIcon.vue')['default']
     Icon: typeof import('./src/components/Icon.vue')['default']
     IPhUploadSimpleFill: typeof import('~icons/ph/upload-simple-fill')['default']
+    Progress: typeof import('./src/components/Progress.vue')['default']
     Upload: typeof import('./src/components/Upload.vue')['default']
   }
 }
