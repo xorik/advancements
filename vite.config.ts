@@ -13,4 +13,5 @@ export default defineConfig({
     }),
     Icons({ autoInstall: true }),
   ],
+  base: '/advancements/',
 })
