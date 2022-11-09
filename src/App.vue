@@ -1,39 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useAdvancements } from './composable/advancement'
 
-import AdvancementCard from './components/AdvancementCard.vue'
-import Progress from './components/Progress.vue'
-import { advancements } from './data/advancements'
-import { Advancement, AdvancementFile, AdvancementFileItem } from './interface/advancement'
-
-interface PendingAdvancement {
-  key: string
-  advancement: Advancement
-  data?: AdvancementFileItem
-}
-
-const unfinishedAdvancements = ref<PendingAdvancement[] | null>(null)
-
-function test(file: AdvancementFile) {
-  const list: PendingAdvancement[] = []
-
-  for (const key in advancements) {
-    if (!file['minecraft:' + key]?.done) {
-      list.push({
-        key: key,
-        advancement: advancements[key],
-        data: file['minecraft:' + key],
-      })
-    }
-  }
-
-  unfinishedAdvancements.value = list
-}
+const { unfinishedAdvancements, updateAdvancements, advancementsCount } = useAdvancements()
 </script>
 
 <template>
   <div class="mx-auto min-w-[320px] max-w-3xl p-5">
-    <Upload @update="test" />
+    <Upload @update="updateAdvancements" />
 
     <h3 v-if="unfinishedAdvancements?.length === 0" class="m-3 text-center text-2xl text-accent">
       All advancements are finished!
@@ -42,8 +15,8 @@ function test(file: AdvancementFile) {
       <h3 class="m-3 text-center text-2xl text-accent">Advancements</h3>
 
       <Progress
-        :done="Object.keys(advancements).length - unfinishedAdvancements.length"
-        :total="Object.keys(advancements).length"
+        :done="advancementsCount - unfinishedAdvancements.length"
+        :total="advancementsCount"
         :wide="true"
         class="my-5"
       />

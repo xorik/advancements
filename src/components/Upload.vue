@@ -1,24 +1,12 @@
 <script setup lang="ts">
-import { useDropZone } from '@vueuse/core'
 import { ref } from 'vue'
 
-import { AdvancementFile } from '../interface/advancement'
+import { UploadEmit, useUpload } from '../composable/upload'
 
-const emit = defineEmits<{
-  (e: 'update', value: AdvancementFile): void
-}>()
-
+const emit = defineEmits<UploadEmit>()
 const dropZoneRef = ref<HTMLDivElement>()
 
-async function onDrop(files: File[] | null) {
-  if (files === null || files.length === 0) {
-    return
-  }
-
-  emit('update', JSON.parse(await files[0].text()))
-}
-
-const { isOverDropZone } = useDropZone(dropZoneRef, onDrop)
+const { isOverDropZone } = useUpload(emit, dropZoneRef)
 </script>
 
 <template>

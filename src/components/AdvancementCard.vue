@@ -1,43 +1,9 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { CriteriaProps, useCriteria } from '../composable/criteria'
 
-import { criteriaList } from '../data/advancements'
-import { Advancement, AdvancementFileItem } from '../interface/advancement'
+const props = defineProps<CriteriaProps>()
 
-const props = defineProps<{
-  index: string
-  advancement: Advancement
-  data?: AdvancementFileItem
-}>()
-
-interface CriteriaItem {
-  key: string
-  icon: string
-  done: boolean
-}
-
-const currentCriteria = criteriaList[props.index]
-
-const criteria = computed(function () {
-  if (currentCriteria === undefined) {
-    return null
-  }
-
-  const list: CriteriaItem[] = []
-
-  // First set finished criteria
-  for (const key in currentCriteria.items) {
-    const unfinished = props.data?.criteria[key] !== undefined || props.data?.criteria['minecraft:' + key] !== undefined
-
-    list.push({
-      key: key,
-      icon: currentCriteria.items[key],
-      done: !unfinished,
-    })
-  }
-
-  return list.sort((a, b) => +b.done - +a.done)
-})
+const { criteria, currentCriteria } = useCriteria(props)
 </script>
 
 <template>
