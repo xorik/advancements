@@ -44,6 +44,7 @@ function test(file: AdvancementFile) {
       <Progress
         :done="Object.keys(advancements).length - unfinishedAdvancements.length"
         :total="Object.keys(advancements).length"
+        :wide="true"
         class="my-5"
       />
 

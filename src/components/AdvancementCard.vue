@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed } from 'vue'
 
 import { criteriaList } from '../data/advancements'
 import { Advancement, AdvancementFileItem } from '../interface/advancement'
@@ -16,11 +16,13 @@ interface CriteriaItem {
   done: boolean
 }
 
-const criteria = ref<CriteriaItem[] | null>(null)
-
-// Check if current advancement has connected criteria list
 const currentCriteria = criteriaList[props.index]
-if (currentCriteria !== undefined) {
+
+const criteria = computed(function () {
+  if (currentCriteria === undefined) {
+    return null
+  }
+
   const list: CriteriaItem[] = []
 
   // First set finished criteria
@@ -33,8 +35,9 @@ if (currentCriteria !== undefined) {
       done: !unfinished,
     })
   }
-  criteria.value = list.sort((a, b) => +b.done - +a.done)
-}
+
+  return list.sort((a, b) => +b.done - +a.done)
+})
 </script>
 
 <template>
