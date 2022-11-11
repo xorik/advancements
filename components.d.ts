@@ -10,7 +10,11 @@ declare module '@vue/runtime-core' {
     AdvancementCard: typeof import('./src/components/AdvancementCard.vue')['default']
     AdvancementIcon: typeof import('./src/components/AdvancementIcon.vue')['default']
     Icon: typeof import('./src/components/Icon.vue')['default']
+    IPhCoffee: typeof import('~icons/ph/coffee')['default']
+    IPhGithubLogo: typeof import('~icons/ph/github-logo')['default']
+    IPhLightbulbFilament: typeof import('~icons/ph/lightbulb-filament')['default']
     IPhUploadSimpleFill: typeof import('~icons/ph/upload-simple-fill')['default']
+    Navbar: typeof import('./src/components/Navbar.vue')['default']
     Progress: typeof import('./src/components/Progress.vue')['default']
     Upload: typeof import('./src/components/Upload.vue')['default']
   }

@@ -5,6 +5,7 @@ const { unfinishedAdvancements, updateAdvancements, advancementsCount } = useAdv
 </script>
 
 <template>
+  <Navbar />
   <div class="mx-auto min-w-[320px] max-w-3xl p-5">
     <Upload @update="updateAdvancements" />
 
