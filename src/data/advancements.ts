@@ -153,6 +153,7 @@ const criteriaList: Record<string, Criteria> = {
   },
   'husbandry/balanced_diet': {
     iconCollection: Sprite.Inventory,
+    noGap: true,
     items: {
       cooked_porkchop: 'Cooked Porkchop',
       chicken: 'Raw Chicken',

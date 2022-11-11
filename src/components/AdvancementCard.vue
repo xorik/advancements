@@ -15,7 +15,7 @@ const { criteria, currentCriteria } = useCriteria(props)
 
         <div v-if="criteria !== null">
           <Progress :done="criteria.filter((c) => !c.done).length" :total="criteria.length" class="mb-3" />
-          <div class="flex flex-wrap justify-between gap-1">
+          <div class="flex flex-wrap justify-center" :class="{ 'gap-1': !currentCriteria.noGap }">
             <div v-for="item in criteria" :key="item.key" :title="item.key">
               <Icon
                 :item="item.icon"

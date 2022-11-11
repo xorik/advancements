@@ -17,6 +17,7 @@ interface Advancement {
 interface Criteria {
   iconCollection: Sprite
   items: Record<string, string>
+  noGap?: boolean
 }
 
 export type { Advancement, AdvancementFile, AdvancementFileItem, Criteria }
