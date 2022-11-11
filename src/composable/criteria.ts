@@ -5,6 +5,7 @@ import { Advancement, AdvancementFileItem } from '../interface/advancement'
 
 interface CriteriaItem {
   key: string
+  title: string
   icon: string
   done: boolean
 }
@@ -30,8 +31,11 @@ function useCriteria(props: CriteriaProps) {
       const unfinished =
         props.data?.criteria[key] !== undefined || props.data?.criteria['minecraft:' + key] !== undefined
 
+      const title = key.replaceAll('_', ' ')
+
       list.push({
         key: key,
+        title: title[0].toUpperCase() + title.slice(1).toLowerCase(),
         icon: currentCriteria.items[key],
         done: !unfinished,
       })

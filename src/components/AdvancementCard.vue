@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Popper from 'vue3-popper'
+
 import { CriteriaProps, useCriteria } from '../composable/criteria'
 
 const props = defineProps<CriteriaProps>()
@@ -16,13 +18,13 @@ const { criteria, currentCriteria } = useCriteria(props)
         <div v-if="criteria !== null">
           <Progress :done="criteria.filter((c) => !c.done).length" :total="criteria.length" class="mb-3" />
           <div class="flex flex-wrap justify-center" :class="{ 'gap-1': !currentCriteria.noGap }">
-            <div v-for="item in criteria" :key="item.key" :title="item.key">
+            <Popper v-for="item in criteria" :key="item.key" :content="item.title" :hover="true" :arrow="true">
               <Icon
                 :item="item.icon"
                 :collection="currentCriteria.iconCollection"
                 :class="{ 'opacity-30 grayscale': !item.done }"
               />
-            </div>
+            </Popper>
           </div>
         </div>
       </div>
