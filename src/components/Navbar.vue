@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import Popper from 'vue3-popper'
+
+import { useTheme } from '../composable/theme'
+
+const { theme, switchTheme } = useTheme()
 </script>
 
 <template>
@@ -10,6 +14,14 @@ import Popper from 'vue3-popper'
     </div>
 
     <div class="flex-none">
+      <Popper content="Dark/light/auto theme" :hover="true" :arrow="true" class="p-2">
+        <a class="cursor-pointer hover:text-accent" @click="switchTheme()">
+          <i-ic-outline-brightness-auto v-if="theme === 'auto'" class="text-xl" />
+          <i-ph-moon v-else-if="theme === 'dark'" class="text-xl" />
+          <i-ph-sun v-else class="text-xl" />
+        </a>
+      </Popper>
+
       <Popper content="Buy me a coffee" :hover="true" :arrow="true" class="p-2">
         <a href="https://github.com/sponsors/xorik" target="_blank" class="hover:text-accent">
           <i-ph-coffee class="text-xl" />

@@ -16,6 +16,7 @@
     "vue3-popper": "^1.5.0"
   },
   "devDependencies": {
+    "@iconify-json/ic": "^1.1.9",
     "@iconify-json/ph": "^1.1.2",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
     "@typescript-eslint/parser": "^5.42.0",
