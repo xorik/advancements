@@ -16,13 +16,18 @@ const { criteria, currentCriteria } = useCriteria(props)
         <p class="font-bold">{{ advancement.title }}</p>
 
         <div v-if="criteria !== null">
-          <Progress :done="criteria.filter((c) => !c.done).length" :total="criteria.length" class="mb-3" />
+          <Progress :done="criteria.filter((c) => c.done).length" :total="criteria.length" class="mb-3" />
           <div class="flex flex-wrap justify-center" :class="{ 'gap-1': !currentCriteria.noGap }">
-            <Popper v-for="item in criteria" :key="item.key" :content="item.title" :hover="true" :arrow="true">
+            <Popper v-for="item in criteria" :key="item.key" :hover="true" :arrow="true">
+              <template #content>
+                {{ item.title }}
+                <span v-if="item.done">, finished {{ item.finishedAt?.value }}</span>
+              </template>
+
               <Icon
                 :item="item.icon"
                 :collection="currentCriteria.iconCollection"
-                :class="{ 'opacity-30 grayscale': !item.done }"
+                :class="{ 'opacity-30 grayscale': item.done }"
               />
             </Popper>
           </div>

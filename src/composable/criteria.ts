@@ -1,4 +1,5 @@
-import { computed } from 'vue'
+import { useTimeAgo } from '@vueuse/core'
+import { computed, Ref } from 'vue'
 
 import { criteriaList } from '../data/advancements'
 import { Advancement, AdvancementFileItem } from '../interface/advancement'
@@ -8,6 +9,7 @@ interface CriteriaItem {
   title: string
   icon: string
   done: boolean
+  finishedAt?: Ref<string>
 }
 
 interface CriteriaProps {
@@ -28,20 +30,22 @@ function useCriteria(props: CriteriaProps) {
 
     // First set finished criteria
     for (const key in currentCriteria.items) {
-      const unfinished =
-        props.data?.criteria[key] !== undefined || props.data?.criteria['minecraft:' + key] !== undefined
+      const jsonFileCriteria = props.data?.criteria[key] ?? props.data?.criteria['minecraft:' + key]
 
       const title = key.replaceAll('_', ' ')
+      const dateParts = jsonFileCriteria?.split(' ')
+      const finishedAt = dateParts !== undefined ? new Date(dateParts[0] + 'T' + dateParts[1]) : undefined
 
       list.push({
         key: key,
         title: title[0].toUpperCase() + title.slice(1).toLowerCase(),
         icon: currentCriteria.items[key],
-        done: !unfinished,
+        done: jsonFileCriteria !== undefined,
+        finishedAt: finishedAt !== undefined ? useTimeAgo(new Date(finishedAt)) : undefined,
       })
     }
 
-    return list.sort((a, b) => +b.done - +a.done)
+    return list.sort((a, b) => +a.done - +b.done)
   })
 
   return {
