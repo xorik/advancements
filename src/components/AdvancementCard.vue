@@ -14,6 +14,7 @@ const { criteria, currentCriteria } = useCriteria(props)
       <AdvancementIcon :data="advancement" class="flex-shrink-0" />
       <div>
         <p class="font-bold">{{ advancement.title }}</p>
+        <p v-if="advancement.description">{{ advancement.description }}</p>
 
         <div v-if="criteria !== null">
           <Progress :done="criteria.filter((c) => c.done).length" :total="criteria.length" class="mb-3" />

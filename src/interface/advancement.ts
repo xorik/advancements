@@ -9,6 +9,7 @@ type AdvancementFile = Record<string, AdvancementFileItem>
 
 interface Advancement {
   title: string
+  description: string
   icon: string
   type: 'plain' | 'oval' | 'fancy'
   rowspan?: number
